@@ -1,78 +1,43 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        storyblok-blog
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="flex">
+    <div class="grid grid-cols-3 gap-4 justify-items-auto">
+      <PostPreview
+        v-for="post in posts"
+        :id="post.id"
+        :key="post.id"
+        :title="post.title"
+        :thumbnail-url="post.thumbnailUrl"
+        :excerpt="post.previewText"
+      />
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import PostPreview from '@/components/Blog/PostPreview'
+export default {
+  components: { PostPreview },
+  data () {
+    return {
+      posts: [
+        {
+          title: 'This is gonna be fun!',
+          previewText: 'This is gonna be lit!',
+          thumbnailUrl: 'https://mk0jabuciwupq77bxofi.kinstacdn.com/wp-content/uploads/2017/11/milada-vigerova-35578.jpg',
+          id: 'lit-1'
+        },
+        {
+          title: 'This is gonna be cool!',
+          previewText: 'This is gonna be lit!',
+          thumbnailUrl: 'https://mk0jabuciwupq77bxofi.kinstacdn.com/wp-content/uploads/2017/11/luca-bravo-149740.jpg',
+          id: 'lit-2'
+        }
+      ]
+    }
+  }
+}
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
