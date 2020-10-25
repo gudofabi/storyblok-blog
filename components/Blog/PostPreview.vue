@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :to="id">
-    <article class="max-w-sm rounded overflow-hidden shadow-lg">
+    <article class="rounded overflow-hidden shadow-lg mx-4 sm:mx-0 md:mx-0 lg:mx-0 xl:mx-0">
       <img class="w-full" :src="thumbnailUrl" alt="Sunset in the mountains">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">

@@ -1,15 +1,13 @@
 <template>
-  <div class="flex">
-    <div class="grid grid-cols-3 gap-4 justify-items-auto">
-      <PostPreview
-        v-for="post in posts"
-        :id="post.id"
-        :key="post.id"
-        :title="post.title"
-        :thumbnail-url="post.thumbnailUrl"
-        :excerpt="post.previewText"
-      />
-    </div>
+  <div class="grid grid-row-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 justify-items-auto">
+    <PostPreview
+      v-for="post in posts"
+      :id="post.id"
+      :key="post.id"
+      :title="post.title"
+      :thumbnail-url="post.thumbnailUrl"
+      :excerpt="post.previewText"
+    />
   </div>
 </template>
 
@@ -17,23 +15,22 @@
 import PostPreview from '@/components/Blog/PostPreview'
 export default {
   components: { PostPreview },
-  data () {
-    return {
-      posts: [
-        {
-          title: 'This is gonna be fun!',
-          previewText: 'This is gonna be lit!',
-          thumbnailUrl: 'https://mk0jabuciwupq77bxofi.kinstacdn.com/wp-content/uploads/2017/11/milada-vigerova-35578.jpg',
-          id: 'lit-1'
-        },
-        {
-          title: 'This is gonna be cool!',
-          previewText: 'This is gonna be lit!',
-          thumbnailUrl: 'https://mk0jabuciwupq77bxofi.kinstacdn.com/wp-content/uploads/2017/11/luca-bravo-149740.jpg',
-          id: 'lit-2'
-        }
-      ]
-    }
+  asyncData (context) {
+    return context.app.$storyapi.get('cdn/stories', {
+      version: 'draft',
+      starts_with: 'blog/'
+    }).then((res) => {
+      return {
+        posts: res.data.stories.map((post) => {
+          return {
+            id: post.slug,
+            title: post.content.title,
+            thumbnailUrl: post.content.thumbnail,
+            previewText: post.content.content
+          }
+        })
+      }
+    })
   }
 }
 </script>

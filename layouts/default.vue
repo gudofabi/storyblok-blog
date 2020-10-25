@@ -1,7 +1,7 @@
 <template>
   <div>
     <the-header />
-    <main class="container mx-auto pt-10">
+    <main class="container lg:mx-auto md:mx-auto sm:mx-auto xs:mx-auto pt-10">
       <Nuxt />
     </main>
   </div>
